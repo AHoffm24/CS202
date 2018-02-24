@@ -1,0 +1,239 @@
+pointers
+*variables that hold memory addresses
+*pointers have "datatypes" to access memory
+
+int *ptr; //initializes and created the pointer
+int x;
+x = 3;
+ptr = &x; //give ptr the address of x.
+x = 5; //modifies x address to hold five
+*ptr = 7; //modifies pointer address(x) to = 7
+
+x = 10;
+cout << x << endl;
+     << *ptr << endl;
+output: 10
+        10
+
+aliasing: /* When two or more identifiers are
+            referencing one memory location. */
+
+example 2:
+
+int *p1, *p2; both pointers
+p1 = new int;
+keyword new; /* new takes memory off the heap rather
+               than the stack */
+             /*  p1 will now point to the new area on the heap holding that info */
+*p1 = 13;    //now that location == 13.
+p2 = p1;     /* Now p1 and p2 point to the same
+                location */
+*p2 = 15;
+cout << *p1 << endl;
+cout << *p2 << endl;
+output: 15
+        15
+
+
+
+
+
+//shallow copy
+char *c1;
+char *c2;
+c1 = new char;
+*c1 = 'A';            //  *c1, the address its pointing to now equals "A"
+c2  =  c1;            //  *c2 now eqauls *c1 address location
+*c2 = 'B';            //  Now *c1 and *c2's location equals b;
+//This above is an example of shallow copy
+
+
+
+
+//deep copy
+char *c3, *c4;     /*   declares c3 and c4 as pointers */
+c3 = new char;     /*   creates new block of memory and points to it;
+*c3 = 'c';         /*   puts 'c' into new block of memory made previously.
+*c4 = *c4;         /*       this will not work. Will crash program because
+                            c4 has not allocated memory yet.        */
+c4 = new char;     /*now this allocates the memory c4 so you can do as above. */
+*c4 = *c3;        /*    now this will work and *c4 = *c3 memory location   */
+*c4 = 'd';         /*   now *c4 = d and *c3 = c     */
+//This above is an example of a deep copy.
+
+
+
+
+//memory leak
+int *ptr1;
+ptr1 = new int;       /*  creates memory location for pointer ptr1  */
+*ptr1 = 5;            /*  ptr1 now = 5                              */
+ptr1 = new int;       /*  gives ptr1 pointer a new memory address   */
+*ptr1 = 5;            /*  new memory address now = 5; Old memory address is now
+                          just floating lost in memory, and no way to actually
+                          get it back now. /*
+// in the case above we have whats called a memory leak. memory thats been lost
+// and now memory is being wasted.
+
+
+// delete function, Dangling pointer
+int  *ptr2;
+ptr2 = new int;
+*ptr2 = 10;
+delete ptr2;            /* marks it for deallocate that block of memory, and
+                           tell the system it can reuse that memory location.
+                           You are left with a dangling pointer. (a pointer
+                           that points to deallocated memory) n */
+ptr2 = new int;  // or you can use
+ptr2 = NULL;     // points the pointer to nothing now.
+cout << ptr2 << endl << *ptr2 << endl;
+                        /*  ptr2 will print out ptr2 address, *ptr2 is unknown
+                            though because that memory has been deallocated.
+                            it all depends on what the compiler does */
+
+ptr2 = new int;          /* now ptr2 points at a different memory address
+//all above is information of the delete function and Dangling pointer and how
+//to deal with them
+
+
+
+
+
+
+//Void pointer
+void *vp;   /* mostly useful while pointing to the address of the function
+            wont most likely use these in c++, better use in java.
+vp = new double;
+*vp = 3.14;  (bad)    /* compiler will crash because the system has no idea how
+                      many points to grab.*/
+double *d;            /*double  * d pointer;
+d = (double*)vp;      /* different pointer type, 1 void one double, using type
+                      casting to make it work. */
+*d = 3.14;            now vp and d both point to memory holding 3.14
+// not importing for cs202 but is in the book, might not really need it.
+
+
+
+//useful pointer information for 2 dimensional arrays
+int *p1;
+int **p2;         /*     **p2 is a pointer that points to another pointer that
+                  points to an int.
+p1 = new int;
+p2 = &p1;         /*p2 points to the address of p1 */
+*p1 = 3;          /*  *p1 now = 3;
+**p2 = 5;         /* **p2 jumps to the address of p1, and jumps to the memory
+                     and changes the 3 to 5.
+*p2 = new int;    /* since *p2 points at *p1, now p1 points at a new location
+                     *p1 old memory location is now a memory leak.
+*p1 = 30;         /* *p1 =  30 now;
+//using  ** points; remember you can have as many ***** as you would like. just
+gets very confusing.
+
+
+
+
+//Software to find memory leaks.
+valgrind ./a.out    -- can use on bobby.
+/* valgrind is a program that checks your program for memory leaks. for when
+ever you forget to use delete (deallocate) memory.
+tells us if there are memory leaks in our program       */
+
+if(true)
+{
+int x;
+int *p;
+x = 5;                      x = 5
+p = new int;
+*p = 10;                 *p points to a memory location holding 10
+delete p;        /*necessary for deleting p
+}
+cout << x << endl;     outputs: 5
+cout << *p << endl;    outputs: 10
+/*will give an error because the couts are after the if block, and can only occur if the if statement occurs which is an illegal action.
+p is destroyed and x is destroyed from the error, but the 10 is never destroyed and has a memory leak. */
+
+
+//Passing pointers to functions and what to be careful about
+int main()
+{
+char* c;
+c = new char;
+*c = 'A';       c points to the letter A;
+foo1(c);  passing pointer as a parameter.
+cout << *c <<endl; //= 'B'.
+foo2(c);
+cout << *c << endl; //= 'B'
+foo3(c);
+cout << *c << endl; //= 'C'
+}
+
+void foo1(char* ch)//ch is essentially just holding the address given from c
+{
+*ch = 'B';
+return;    *ch is destroyed when it returns.
+}
+/*since c passes the address of the pointer *C by value into the functions
+foo1, Technically *ch can access the exact same address and modify the
+contents of *c even though it wasnt passed by reference. pretty cool*/
+
+void foo2(char* ch)
+{
+ch = new char;
+*ch = 'c';
+/* memory leak occurs because pointer address is passed by value not by
+reference. */
+delete ch; no memory leak
+}
+
+void foo3(char *& ch) //c being passed by reference parameter this time
+{
+delete ch;
+ch = new char;   //c no longer points to orig block
+*ch = 'c';     //now *ch points to a new block containing the letter 'c';
+/*
+}
+
+
+
+
+
+//
+struct person
+{                                       k points to
+string first;                           first = kevin
+string last;                            last = smith
+}                                       (delete k deallocates all above)
+int main()
+{
+person j;
+person *k;
+j.first = "jack";
+// k.first = "kevin"; will not work
+k = new person;
+// *k.first = "kevin"; will also not work;
+(*k).first = "kevin";
+k -> last = "smith";   k -> last == (*k).last
+delete k
+}
+
+
+
+//
+class mastermind
+{
+public:                                       //game
+mastermind(int);                             //holds the following
+mastermind(int, string[]);                   //
+int move(int,int);
+private:
+string pegs[10];
+}
+int main()
+{
+mastermind * game;              //will hold an object of type mastermind
+game  = new mastermind(4);
+mastermind mygame(4)
+determine = mygame.move(g,s);
+determine = game-> move(g,s);
+delete game;   deallocates this game;
+}

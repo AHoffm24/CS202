@@ -1,0 +1,20 @@
+/* notes for assignment 3
+
+bool correct[10]
+bool player[10]
+for(int i = o, i < cols; i++)
+    correct[i] = player[i] = false
+
+    silver  = gold  = 0; sets both to zero
+    for each i in range(o, cols minus 1)
+    if player moves[i] == pegs[i]
+    player i = correct[i] = tme;
+    silver: for each i in range 0, i < cols
+        if !player[i]
+        for each j in range 0, i < cols
+            if(! correct[j])
+                if player move[i] == pegs[j]
+                silver ++
+                correct[j] = tme
+
+*/

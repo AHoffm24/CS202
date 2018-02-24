@@ -1,0 +1,123 @@
+inheritance - understand what it is and how to execute. Similar to a question on exam 2.
+
+//***********************************************************
+classes :
+question that will be on the exam
+how many accessor functions do we have in this?
+how many constructors are there?
+
+class A
+{
+public:
+int foo() const;
+void print() const;
+void set(int);
+A(); // constructor
+private:
+int y;
+};
+
+/*
+all things with const are accessor functions? look up more on
+accessor function.
+copy constructor also there. more than 1 constructor in the class
+no the different properties that are hidden in this class.
+default destructors is technically in this class.
+*/ anything with  name - = find the definition
+
+public -
+private -
+protected -
+Encapsulation -
+constructor - what are they and how are they invoked
+destructor  - what are they and how are they invoked
+operator overloading - very similar question as the first test.
+must add extra stuff to the class.
+class B
+{
+pubic:
+    b operator+(int);
+    b operator-(const B&);
+    .// will have to write function prototypes 100%
+    .
+private:
+}
+main()
+{
+b obj1, obj2, obj3;
+obj3= obj1 + 4
+obj4 = obj1 - obj2;
+obj3 = obj1 - 10;
+bj3 = 4 * obj2; //friend function to be called.
+}
+
+//***********************************************************\
+pointers on exam:
+resizing a 2 dimensional array using pointer must KNOW!!!!!!!!
+very similar to the factory function code from assignment 7-8
+contain addresses that point to memory location.
+something like the spongebob squidward question from exam 2.
+{
+char * c;
+c = new char;
+*c = 'a';
+delete c; //deallocates memory. c becomes a dangling pointers
+c = NULL;
+}
+
+//**************************************************************
+linkedlist on exam:
+no link list or memberfunctions on final
+must know how to actually insert from the front of the link list.
+must know how to actually move through the link list from scratch.
+how to manually create, move through, change, and delete a linked
+list.
+
+check example hand out for better info on how to navigate L.L.;
+
+example L.L. question
+[c][]->[a][]->[r][/]
+1. - insert a node A at the front.
+
+2. - delete the last node
+
+3. - delete 2nd node
+
+1. -----------------------------------------------------------
+node * temp;
+temp = new node; //must create new node object
+temp->item = 'b';
+temp->link = head; //head always points to front
+head = temp;
+temp = NULL;
+[b][]->[c][]->[a][]->[r][/]
+
+2.-----------------------------------------------------------
+node *c1, *c2;
+c1 = c2 = head;
+c2 = c2->link->link->link; //points to 'r' node now
+c1 = c1->link->link; //points to 'a' node now
+c1->link = NULL; // or can do c1->link = c2 ->link cause it //
+//already points to null, or will point to the following node if
+// node youre deleting is not last node.
+delete c2;
+
+
+
+
+//***********************************************************
+stacks:
+stack<int> s;
+s.push(3);
+s.push(5);
+look at notes from class
+
+//***********************************************************
+queues: have to be able to draw queue after each enqueue and
+dequeue operation.
+
+
+
+//***********************************************************
+recursion:
+simple function like factorial, power of a number. 

@@ -1,0 +1,64 @@
+iterators -
+//**********************************************************
+matrix(size_t r, size_t c, int **a)
+{
+rows = r;
+columns  = c;
+element = new linkedlist<int>[rows];
+for(int i = 0; i < rows; i++)
+{
+    for(int j = 0; j < columns; j++)
+    {
+    elemenet[i].instert_back(a[i][j])
+    }
+}
+}
+
+//**********************************************************
+~matrix()
+{
+    if(element != NULL)
+    {
+    for(int i = 0; i < rows; i++)
+    {
+        element[i].destroylist();
+    }
+    delete [] element;
+    }
+}
+//**********************************************************
+matrix(const matrix& copy)
+{
+    rows = copy.rows;
+    columns = copy.columns;
+    element = new linkedlist<int>[rows];    //LL = Linked List
+    linkedlist<int>::iterator it;       //how to create a iterators for LL
+    //this or the onebelow.
+    for(int i = 0; i < rows; i++)
+    {
+        it = copy.element[i].begin();
+        for(int j = 0; j < columns; j++)
+        {
+            element[i].insert_back(*it)
+            it++;
+        }
+    }
+    //or you can do that. both work.
+        for(int i = 0; i < rows; i++)
+            element[i] = copy.element[i];
+
+
+}
+//**********************************************************
+operator=(const matrix& rhs)
+
+//**********************************************************
+//trying to access element[i][j]
+//you would do
+//THIS WILL BE USED A LOT TO JUMP AROUND IN OUR PROGRAM.
+//this is usually used inside of a nested for loop usually.
+linkedlist<int>::iterator it;
+it = element[i].begin();
+for(int x = 0; x < j; x++)
+    it++;
+    t

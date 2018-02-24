@@ -1,0 +1,15 @@
+The reason why the program runs slower for smaller increment sizes is because
+every time the program reaches its increment size, it is required to resize the
+array, which requires a loop to run as many times as the array is big. When
+were talking about small array, less then say 1000, the time it takes to resize
+and array is very small. You also have to take into account that a increment
+size 1000, for 100,000 inputs, will only have to resize 100 times, but for for
+an increment size of 1, it would need to resize the array 100,000 times, and
+when the current array size gets larger that can become taxing on the system.
+
+The down size of an increment size that is too large is wasted memory. If you
+an input file with 100,001 inputs, and you set your increment size to 100,000
+it will allocate memory for 99,999 spot in the array that will go unused.
+By using smaller incrementing sizes, you will find that there is much less
+wasted allocated memory, even though it may take a few milliseconds longer for
+your program to run. 

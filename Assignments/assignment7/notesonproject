@@ -1,0 +1,16 @@
+Matrix program
+
+int **element = a pointer that will point 2 dimensional array i.e a matrix
+
+contructor sets everything to 0.
+
+make sure you use a deep copy from "a" into "element"
+
+
+operator* = below
+if columns != rhs.rows
+return empty matrix()
+
+if giving segfaults comment out DESTRUCTOR to check your math and you know
+then your problems the DESTRUCTOR
+also memory leaks can be screwed. 

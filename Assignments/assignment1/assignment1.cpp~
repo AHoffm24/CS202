@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+bool isPalindrome(string);
+
+int main()
+{
+  int length;
+  string pal;
+
+  cin >> pal;
+  while(cin)
+  {
+  length = pal.length();
+  cout << pal << " ";
+  cout << length;
+  cin >> pal;
+  }
+  // isPalindrome(pal);
+return 0;
+}//end of main
+
+/* bool isPalindrome(string pal)
+{
+
+}//end of bool isPalindrome
+*/
