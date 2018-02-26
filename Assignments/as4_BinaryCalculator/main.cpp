@@ -1,3 +1,4 @@
+//Binary calculator 
 #include <iostream>
 #include "binNumber.h"
 using namespace std;
